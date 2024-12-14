@@ -13,13 +13,16 @@ function getPerson(id) {
 
 function addPerson(personToAdd) {
     let person = new Person(personToAdd)
-    return person.save().then((returnedPerson) => {
-        console.log(returnedPerson)
-        return returnedPerson
-    })
-    // .catch((e) => {
-    //     throw e;
-    // });
+    return person
+        .save()
+        .then((returnedPerson) => {
+            // console.log(returnedPerson)
+            return returnedPerson
+        })
+        // .catch((e) => {
+        //     console.log('meow', e.message)
+        //     throw e
+        // })
 }
 
 function updatePerson(id, details) {

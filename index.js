@@ -87,17 +87,19 @@ app.post('/api/persons/', async (req, res, next) => {
             res.json(returnedPerson)
         })
         .catch((e) => {
+            console.log('meow', e.message)
             next(e)
         })
 })
 
-app.use((err, req, res) => {
-    console.log(err.message)
+app.use((err, req, res, next) => {
+    // console.log('meow', err.message)
     if (err.name === 'ValidationError') {
         res.status(400).send({ error: err.message })
         return
     }
-    res.status(500).send({ error: 'Internal server error' })
+    res.status(500).send({ error: err.name })
+    next()
 })
 
 const PORT = 3001
