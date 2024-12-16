@@ -1,6 +1,6 @@
 // const mongoose=require("mongoose");
 // const httpError=require("http-e")
-const Person = require('./personModel.js')
+const Person = require('./models/personModel.js')
 function getPeople() {
     return Person.find().then((people) => {
         return people
