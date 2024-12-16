@@ -3,10 +3,10 @@ const {
     addPerson,
     getPeople,
     personExists,
-    // deletePerson,
+    deletePerson,
     getPerson,
     updatePerson,
-    // countOfAllPersons,
+    countOfAllPersons,
 } = require('../dbHandler.js')
 // const logger = require('../utils/logger.js')
 
@@ -59,6 +59,23 @@ phoneRouter.post('/', (req, res, next) => {
         .catch((e) => {
             next(e)
         })
+})
+
+phoneRouter.delete('/:id', (req, res, next) => {
+    let id = req.params.id
+    deletePerson(id)
+        .then((deletedPerson) => {
+            res.json(deletedPerson)
+        })
+        .catch((e) => next(e))
+})
+
+phoneRouter.get('/info', (req, res, next) => {
+    countOfAllPersons()
+        .then((count) => {
+            res.send(`<p>PhoneBook has ${count}</p><p>${Date()}</p>`)
+        })
+        .catch((e) => next(e))
 })
 
 module.exports = phoneRouter
